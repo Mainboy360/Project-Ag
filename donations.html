@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donations - Assemblies of God</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">SM</div>
+    <nav class="nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="live.html">Live</a></li>
+        <li><a href="donations.html" class="active">Donations</a></li>
+        <li><a href="bookshop.html">Bookshop</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Support the Ministry</h2>
+    <form id="donationForm">
+      <input type="number" id="amount" placeholder="Enter amount (₦)" required>
+      <select id="purpose">
+        <option value="Tithe">Tithe</option>
+        <option value="Offering">Offering</option>
+        <option value="Missions">Missions</option>
+        <option value="Building">Building Fund</option>
+      </select>
+      <button type="submit">Give with Paystack</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Assemblies of God</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
