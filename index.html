@@ -3,40 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assemblies of God </title>
-  <link rel="stylesheet" href="style.css">
+  <title>Assemblies of God</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Header -->
   <header class="header">
     <div class="navigation">
       <div class="logo">AG</div>
+      <button class="menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="nav">
         <ul>
-          <a href="index.html" class="active"><span style="color:  white;"><li style="border: 1px solid white; padding: 5px; border-radius: 5px;">Home</li></span></a>
-          <a href="live.html"><span style="color: white"><li>Live</li></span>
-          <a href="donations.html"><span style="color: white"><li>Donations</li></span>
-
-          <a href="onlinestore.html"><span style="color: white;"><li>Bookshop</li></span></a>
-          <a href="contact.html"><span style="color: white">Contact</li></span></a>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="live.html">Live</a></li>
+          <li><a href="donations.html">Donations</a></li>
+          <li><a href="onlinestore.html">Bookshop</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-
     </div>
-      <!-- Hero -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1> <span style="color: white; margin-top: 70px;"> Welcome to Assemblies of Church</span></h1>
-      <p>Experience God’s presence every Sunday — in person or online.</p>
-      <div class="hero-buttons">
-        <a href="live.html"><button>Watch Live</button></a>
-        <a href="donations.html"><button class="secondary">Donate</button></a>
+    
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Welcome to Assemblies of Church</h1>
+        <p>Experience God's presence every Sunday — in person or online.</p>
+        <div class="hero-buttons">
+          <a href="live.html"><button>Watch Live</button></a>
+          <a href="donations.html"><button class="secondary">Donate</button></a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   </header>
-
-
 
   <!-- Events -->
   <section class="section">
@@ -63,5 +65,13 @@
   <footer class="footer">
     <p>© 2025 Assemblies of God | Built with ❤️</p>
   </footer>
+
+  <script>
+    // Mobile menu toggle functionality
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav').classList.toggle('nav-open');
+      this.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>

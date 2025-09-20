@@ -1,0 +1,238 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; color: #333; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; transition: 0.3s; }
+
+/* Header */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  width: 100%;
+}
+
+.header {
+  background-image: url(church-7583110_1280.jpg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-size: cover;
+  background-position: center;
+}
+
+.logo { 
+  font-size: 1.8rem;
+  font-weight: bold; 
+  color: #c97a10;  
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+.nav ul { 
+  display: flex; 
+  gap: 1.5rem;
+  list-style: none; 
+}
+
+.nav li a {
+  color: white;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 5px;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.nav li a.active { 
+  background-color: rgba(201, 122, 16, 0.8);
+  border: 1px solid white;
+}
+
+.nav li a:hover { 
+  background-color: rgba(201, 122, 16, 0.6);
+}
+
+/* Hero */
+.hero {
+  min-height: 60vh;
+  width: 100%;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-align: center; 
+  color: white;
+  padding: 2rem;
+}
+
+.hero-text h1 { 
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.hero-text p { 
+  margin-bottom: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-buttons button {
+  margin: 0.5rem; 
+  padding: 0.8rem 1.5rem;
+  border: none; 
+  border-radius: 5px;
+  font-weight: bold;
+  min-width: 150px;
+}
+
+.hero-buttons button { 
+  background: #c97a10;
+  color: white; 
+}
+
+.hero-buttons .secondary { 
+  background: rgb(46, 21, 21); 
+  color: #c97a10;
+}
+
+/* Sections */
+.section { 
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem); 
+  text-align: center; 
+}
+
+.section h2 {
+  margin-bottom: 1.5rem; 
+  font-size: clamp(1.5rem, 4vw, 2rem); 
+  color: #c97a10; 
+}
+
+.cards { 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white; 
+  padding: 1.5rem; 
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+.footer { 
+  background: #111; 
+  color: #eee; 
+  text-align: center; 
+  padding: 1.5rem; 
+  margin-top: 2rem; 
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* ===================== */
+/* Responsive Breakpoints */
+/* ===================== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .navigation {
+    flex-wrap: wrap;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .nav {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .nav-open {
+    max-height: 300px;
+  }
+  
+  .nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  
+  .hero {
+    min-height: 50vh;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-buttons button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .navigation {
+    padding: 15px;
+  }
+  
+  .hero {
+    min-height: 40vh;
+    padding: 1.5rem;
+  }
+  
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
