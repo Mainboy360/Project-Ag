@@ -4,20 +4,264 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Streaming - Assemblies of God</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      color: #333; 
+      line-height: 1.6;
+    }
+    
+    a { 
+      text-decoration: none; 
+      color: inherit; 
+    }
+    
+    button { 
+      cursor: pointer; 
+      transition: 0.3s; 
+    }
+    
+    /* Header */
+    .header {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+    }
+    
+    .logo { 
+      font-size: 1.8rem;
+      font-weight: bold; 
+      color: #c97a10;  
+      z-index: 100;
+    }
+    
+    .nav { 
+      display: flex;
+    }
+    
+    .nav ul { 
+      display: flex; 
+      gap: 1.5rem;
+      list-style: none; 
+    }
+    
+    .nav li {
+      color: white;
+    }
+    
+    .nav a { 
+      font-weight: 500; 
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav a.active, 
+    .nav a:hover { 
+      color: #c97a10;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 25px;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Main Content */
+    .section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .section h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #c97a10;
+    }
+    
+    /* Stream Selector */
+    #branchSelect {
+      padding: 0.8rem 1.5rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: white;
+      font-size: 1rem;
+      color: #333;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Video Container */
+    .video-placeholder {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      background-color: #000;
+      margin-top: 1rem;
+    }
+    
+    #liveStream {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Footer */
+    .footer { 
+      background: #111; 
+      color: #eee; 
+      text-align: center; 
+      padding: 1.5rem; 
+      margin-top: 2rem; 
+    }
+    
+    /* ===================== */
+    /* Responsive Breakpoints */
+    /* ===================== */
+    
+    /* Tablets */
+    @media (max-width: 992px) {
+      .navigation {
+        padding: 15px;
+      }
+      
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: black;
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        z-index: 1000;
+      }
+      
+      .nav-open {
+        max-height: 300vh;
+      }
+      
+      .nav ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 1rem 0;
+      }
+      
+      .nav li {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .nav a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+      }
+      
+      .section {
+        padding: 1.5rem;
+      }
+    }
+    
+    /* Mobile */
+    @media (max-width: 600px) {
+      .section {
+        padding: 1rem;
+      }
+      
+      .section h2 {
+        font-size: 1.7rem;
+      }
+      
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
-    <div class="logo">AG</div>
-    <nav class="nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="live.html" class="active">Live</a></li>
-        <li><a href="donations.html">Donations</a></li>
-        <li><a href="bookshop.html">Bookshop</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
+    <div class="navigation">
+      <div class="logo">AG</div>
+      <button class="menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="live.html" class="active">Live</a></li>
+          <li><a href="donations.html">Donations</a></li>
+          <li><a href="bookshop.html">Bookshop</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <section class="section">
@@ -28,8 +272,11 @@
       <option value="VIDEO_ID_3">Campus Fellowship</option>
     </select>
     <div class="video-placeholder">
-      <iframe id="liveStream" width="100%" height="400"
-        src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen>
+      <iframe id="liveStream" 
+        src="https://www.youtube.com/embed/VIDEO_ID_1" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
       </iframe>
     </div>
   </section>
@@ -37,6 +284,21 @@
   <footer class="footer">
     <p>© 2025 Assemblies of God</p>
   </footer>
-  <script src="script.js"></script>
+
+  <script>
+    // Mobile menu toggle functionality
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav').classList.toggle('nav-open');
+      this.classList.toggle('active');
+    });
+    
+    // Function to change the stream
+    function changeStream() {
+      const select = document.getElementById('branchSelect');
+      const videoId = select.value;
+      const iframe = document.getElementById('liveStream');
+      iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    }
+  </script>
 </body>
 </html>
