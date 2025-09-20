@@ -4,40 +4,416 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donations - Assemblies of God</title>
-  <link rel="stylesheet" href="style.css">
   <script src="https://js.paystack.co/v1/inline.js"></script>
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      color: #333; 
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    
+    a { 
+      text-decoration: none; 
+      color: inherit; 
+    }
+    
+    button { 
+      cursor: pointer; 
+      transition: 0.3s; 
+    }
+    
+    /* Header */
+    .header {
+      background-image: url(church-7583110_1280.jpg);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: relative;
+      background-color: black
+    }
+    
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+    }
+    
+    .logo { 
+      font-size: 1.8rem;
+      font-weight: bold; 
+      color: #c97a10;  
+      z-index: 100;
+    }
+    
+    .nav { 
+      display: flex;
+    }
+    
+    .nav ul { 
+      display: flex; 
+      gap: 1.5rem;
+      list-style: none; 
+    }
+    
+    .nav li {
+      color: white;
+    }
+    
+    .nav a { 
+      font-weight: 500; 
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav a.active, 
+    .nav a:hover { 
+      color: #c97a10;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 25px;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Main Content */
+    .section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .section h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #c97a10;
+    }
+    
+    /* Donation Form */
+    #donationForm {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    #donationForm input, 
+    #donationForm select {
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+    }
+    
+    #donationForm button {
+      background: #c97a10;
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    
+    #donationForm button:hover {
+      background: #a25d0c;
+    }
+    
+    /* Donation Options */
+    .donation-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .donation-option {
+      background: #f8f8f8;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .donation-option:hover {
+      transform: translateY(-5px);
+    }
+    
+    .donation-option h3 {
+      color: #c97a10;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Footer */
+    .footer { 
+      background: #111; 
+      color: #eee; 
+      text-align: center; 
+      padding: 1.5rem; 
+      margin-top: 2rem; 
+    }
+    
+    /* Thank You Message */
+    .thank-you {
+      display: none;
+      background: #f0fff0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #4caf50;
+      margin-top: 1.5rem;
+    }
+    
+    /* ===================== */
+    /* Responsive Breakpoints */
+    /* ===================== */
+    
+    /* Tablets */
+    @media (max-width: 992px) {
+      .navigation {
+        padding: 15px;
+      }
+      
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: black;
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      
+      .nav-open {
+        max-height: 300px;
+      }
+      
+      .nav ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 1rem 0;
+      }
+      
+      .nav li {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .nav a {
+        display: block;
+        padding: 1rem;
+        width: 100%;
+      }
+      
+      .section {
+        padding: 1.5rem;
+        margin: 1.5rem;
+      }
+      
+      .donation-options {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Mobile */
+    @media (max-width: 600px) {
+      .section {
+        padding: 1rem;
+        margin: 1rem;
+      }
+      
+      .section h2 {
+        font-size: 1.7rem;
+      }
+      
+      #donationForm button {
+        padding: 0.8rem;
+      }
+      
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="header">
-    <div class="logo">SM</div>
-    <nav class="nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="live.html">Live</a></li>
-        <li><a href="donations.html" class="active">Donations</a></li>
-        <li><a href="bookshop.html">Bookshop</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
+    <div class="navigation">
+      <div class="logo">AG</div>
+      <button class="menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="live.html">Live</a></li>
+          <li><a href="donations.html" class="active">Donations</a></li>
+          <li><a href="onlinestore.html">Bookshop</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <section class="section">
     <h2>Support the Ministry</h2>
+    <p style="margin-bottom: 1.5rem;">Your generous donation helps us continue our mission and outreach programs.</p>
+    
     <form id="donationForm">
-      <input type="number" id="amount" placeholder="Enter amount (₦)" required>
-      <select id="purpose">
+      <input type="number" id="amount" placeholder="Enter amount (₦)" required min="100">
+      <select id="purpose" required>
+        <option value="" disabled selected>Select purpose</option>
         <option value="Tithe">Tithe</option>
         <option value="Offering">Offering</option>
         <option value="Missions">Missions</option>
         <option value="Building">Building Fund</option>
+        <option value="Other">Other</option>
       </select>
       <button type="submit">Give with Paystack</button>
     </form>
+    
+    <div class="thank-you" id="thankYou">
+      <h3>Thank you for your generous donation!</h3>
+      <p>Your support helps us continue our mission and make a difference in our community.</p>
+    </div>
+    
+    <div class="donation-options">
+      <div class="donation-option">
+        <h3>Tithe</h3>
+        <p>Faithfully returning 10% of your income to support the church.</p>
+      </div>
+      <div class="donation-option">
+        <h3>Offering</h3>
+        <p>Freewill gifts beyond the tithe to support church operations.</p>
+      </div>
+      <div class="donation-option">
+        <h3>Missions</h3>
+        <p>Supporting evangelism and outreach programs locally and globally.</p>
+      </div>
+      <div class="donation-option">
+        <h3>Building Fund</h3>
+        <p>Contributing to the maintenance and expansion of our facilities.</p>
+      </div>
+    </div>
   </section>
 
   <footer class="footer">
     <p>© 2025 Assemblies of God</p>
   </footer>
-  <script src="script.js"></script>
+
+  <script>
+    // Mobile menu toggle functionality
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.querySelector('.nav').classList.toggle('nav-open');
+      this.classList.toggle('active');
+    });
+    
+    // Paystack payment integration
+    document.getElementById('donationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const amount = document.getElementById('amount').value;
+      const purpose = document.getElementById('purpose').value;
+      
+      if (!amount || amount < 100) {
+        alert('Please enter a valid amount (minimum ₦100)');
+        return;
+      }
+      
+      if (!purpose) {
+        alert('Please select a donation purpose');
+        return;
+      }
+      
+      // In a real implementation, you would use your actual Paystack public key
+      const handler = PaystackPop.setup({
+        key: 'pk_test_your_public_key_here', // Replace with your public key
+        email: 'user@example.com', // You would typically collect this from the user
+        amount: amount * 100, // Convert to kobo
+        currency: 'NGN',
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Donation Purpose",
+              variable_name: "purpose",
+              value: purpose
+            }
+          ]
+        },
+        callback: function(response) {
+          // Show thank you message
+          document.getElementById('thankYou').style.display = 'block';
+          // Reset form
+          document.getElementById('donationForm').reset();
+          // You would typically send the reference to your server for verification
+          console.log('Payment complete! Reference: ' + response.reference);
+        },
+        onClose: function() {
+          alert('Payment window closed.');
+        }
+      });
+      
+      handler.openIframe();
+    });
+  </script>
 </body>
 </html>
